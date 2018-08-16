@@ -4,6 +4,7 @@ The node-easy-notes-app reimplemented in Spring Boot / Kotlin for CDC testing us
 ## Reference documentation
 * [_Building a REST Service with Kotlin, Spring Boot, MongoDB, and JUnit_ by Richard Wolniewicz](https://medium.com/@rhwolniewicz/building-a-rest-service-with-kotlin-spring-boot-mongodb-and-junit-14d10faa594b)
 * [_Spring Data MongoDB - Reference Documentation_](https://docs.spring.io/spring-data/data-mongo/docs/1.7.0.M1/reference/html/)
+* [_Fongo - an in-memory Java implementation of MongoDB_](https://github.com/fakemongo/fongo)
 * [_Pact Implementation Guide - Javascript_](https://docs.pact.io/implementation_guides/javascript)
 * [_Pact Implementation Guide - JVM_](https://docs.pact.io/implementation_guides/jvm)
 
