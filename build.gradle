@@ -59,9 +59,10 @@ pact {
         'easy-notes-app' {
             // Only load the pacts from the broker if the start tasks from the command line include pactVerify
             if ('pactVerify' in gradle.startParameter.taskNames) {
-                hasPactsFromPactBroker('http://localhost:80/')
+                hasPactsFromPactBrokerWithTag('http://localhost:80', 'test')
+                stateChangeUrl = url('http://localhost:8989/setup')
+                stateChangeUsesBody = false // defaults to true
             }
         }
     }
-
 }
