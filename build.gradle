@@ -1,26 +1,20 @@
 buildscript {
-	ext {
-		kotlinVersion = '1.2.60'
-		springBootVersion = '2.0.4.RELEASE'
-		pactPluginVersion = '3.5.21'
-	}
 	repositories {
 		mavenCentral()
 	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
-		classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
-		classpath("au.com.dius:pact-jvm-provider-gradle_2.12:${pactPluginVersion}")
-	}
 }
 
-apply plugin: 'kotlin'
-apply plugin: 'kotlin-spring'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
+plugins {
+	id "org.jetbrains.kotlin.jvm" version "1.2.61"
+	id "org.jetbrains.kotlin.plugin.spring" version "1.2.61"
+	id 'org.springframework.boot' version '2.0.4.RELEASE'
+	id "com.wiredforcode.spawn" version "0.8.2"
+	id "au.com.dius.pact" version "3.5.21"
+}
+
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'au.com.dius.pact'
+
+import com.wiredforcode.gradle.spawn.*
 
 group = 'com.zuhlke.uk.poc'
 version = '0.0.1-SNAPSHOT'
@@ -54,9 +48,41 @@ dependencies {
 	testCompile('com.github.fakemongo:fongo:2.2.0-RC2')
 }
 
+if('pactVerify' in gradle.startParameter.taskNames) {
+    // Include test dependencies and sources in jar file
+    dependencies {
+        compile('org.springframework.boot:spring-boot-starter-test')
+        compile('org.jetbrains.kotlin:kotlin-test')
+        compile('org.jetbrains.kotlin:kotlin-test-junit')
+        compile('com.github.fakemongo:fongo:2.2.0-RC2')
+    }
+
+    sourceSets {
+        main {
+            kotlin {
+                srcDir 'src/test/kotlin'
+            }
+            resources {
+                srcDir 'src/test/resources'
+            }
+        }
+    }
+}
+
+task startProvider(type: SpawnProcessTask, dependsOn: 'assemble') {
+	command "java -Dspring.profiles.active=pactVerify -jar ${jar.archivePath}"
+	ready "Started springb-easy-notes-app Application"
+}
+
+task stopProvider(type: KillProcessTask) {
+}
+
 pact {
     serviceProviders {
         'easy-notes-app' {
+			port = 8989
+			startProviderTask = startProvider
+			terminateProviderTask = stopProvider
             // Only load the pacts from the broker if the start tasks from the command line include pactVerify
             if ('pactVerify' in gradle.startParameter.taskNames) {
                 hasPactsFromPactBrokerWithTag('http://localhost:80', 'test')

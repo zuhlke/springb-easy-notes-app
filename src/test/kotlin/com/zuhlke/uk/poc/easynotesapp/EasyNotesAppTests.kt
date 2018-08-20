@@ -8,11 +8,13 @@ import org.junit.Rule
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import java.util.*
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
+@ActiveProfiles(*["test", "pactVerify"])
 abstract class EasyNotesAppTests(val initializeTestData: Boolean = true) {
 
 	@get:Rule
