@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.TypeAlias
 import java.util.*
 
-@TypeAlias("note")
+@TypeAlias("notes")
 data class Note(@Id val _id: String,
                 val title: String,
                 val content: String,
