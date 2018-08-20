@@ -1,3 +1,5 @@
+package com.zuhlke.uk.poc.easynotesapp
+
 import com.github.fakemongo.Fongo
 import com.mongodb.MongoClient
 import org.slf4j.Logger
@@ -12,8 +14,13 @@ class TestConfiguration : AbstractMongoConfiguration() {
     @Autowired
     lateinit var env: Environment
 
-    override fun getDatabaseName() =
-            env.getProperty("mongo.db.name", "test")
+    override fun getDatabaseName() = returnDatabaseName();
+
+    fun returnDatabaseName() : String {
+        val dbname = env.getProperty("mongo.db.name", "test")
+        logger.info("Getting in-memory database name: $dbname")
+        return dbname
+    }
 
     override fun mongoClient(): MongoClient {
         logger.info("Instantiating Fongo with name $databaseName.")
