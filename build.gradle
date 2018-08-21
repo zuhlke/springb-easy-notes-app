@@ -51,9 +51,6 @@ dependencies {
 if('pactVerify' in gradle.startParameter.taskNames) {
     // Include test dependencies and sources in jar file
     dependencies {
-        compile('org.springframework.boot:spring-boot-starter-test')
-        compile('org.jetbrains.kotlin:kotlin-test')
-        compile('org.jetbrains.kotlin:kotlin-test-junit')
         compile('com.github.fakemongo:fongo:2.2.0-RC2')
     }
 
@@ -61,6 +58,10 @@ if('pactVerify' in gradle.startParameter.taskNames) {
         main {
             kotlin {
                 srcDir 'src/test/kotlin'
+                exclude '**/NoteControllerTest*'
+                exclude '**/NoteControllerTestFongoMockMvc*'
+                exclude '**/NoteServiceTest*'
+                exclude '**/EasyNotesAppTests*'
             }
             resources {
                 srcDir 'src/test/resources'
@@ -71,7 +72,7 @@ if('pactVerify' in gradle.startParameter.taskNames) {
 
 task startProvider(type: SpawnProcessTask, dependsOn: 'assemble') {
 	command "java -Dspring.profiles.active=pactVerify -jar ${jar.archivePath}"
-	ready "Started springb-easy-notes-app Application"
+	ready "Started EasyNotesAppApplicationKt"
 }
 
 task stopProvider(type: KillProcessTask) {

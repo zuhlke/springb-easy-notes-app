@@ -11,7 +11,7 @@ import org.springframework.core.env.Environment
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration
 
 @Configuration
-@Profile(*["test", "pactVerify"])
+@Profile("test", "pactVerify")
 class TestConfiguration : AbstractMongoConfiguration() {
     @Autowired
     lateinit var env: Environment

@@ -14,7 +14,7 @@ import java.util.*
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
-@ActiveProfiles(*["test", "pactVerify"])
+@ActiveProfiles("test")
 abstract class EasyNotesAppTests(val initializeTestData: Boolean = true) {
 
 	@get:Rule
