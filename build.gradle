@@ -37,11 +37,22 @@ repositories {
 }
 
 dependencies {
+	compile(
+			"org.springframework.boot:spring-boot-starter-jersey",
+			"org.slf4j:slf4j-api"
+	)
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-web') {
+		exclude module: 'spring-boot-starter-tomcat'
+	}
+	compile('org.springframework.boot:spring-boot-starter-jetty')
 	compile('com.fasterxml.jackson.module:jackson-module-kotlin')
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	compile("org.jetbrains.kotlin:kotlin-reflect")
+
+	testCompile (
+			"org.assertj:assertj-core",
+	)
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.jetbrains.kotlin:kotlin-test')
 	testCompile('org.jetbrains.kotlin:kotlin-test-junit')
@@ -49,23 +60,21 @@ dependencies {
 }
 
 if('pactVerify' in gradle.startParameter.taskNames) {
-    // Include test dependencies and sources in jar file
+    // Include test dependencies, resources and configuration classes in jar file
     dependencies {
         compile('com.github.fakemongo:fongo:2.2.0-RC2')
     }
 
     sourceSets {
         main {
-            kotlin {
-                srcDir 'src/test/kotlin'
-                exclude '**/NoteControllerTest*'
-                exclude '**/NoteControllerTestFongoMockMvc*'
-                exclude '**/NoteServiceTest*'
-                exclude '**/EasyNotesAppTests*'
+			// Add TestConfiguration.kt and application-pactVerify to the source set
+			kotlin {
+				srcDir 'src/test/kotlin'
+				exclude { FileTreeElement e -> ((e.path.contains('Test') && ! e.path.contains('TestConfiguration'))) }
             }
-            resources {
-                srcDir 'src/test/resources'
-            }
+			resources {
+				srcDir 'src/test/resources'
+			}
         }
     }
 }
@@ -75,8 +84,7 @@ task startProvider(type: SpawnProcessTask, dependsOn: 'assemble') {
 	ready "Started EasyNotesAppApplicationKt"
 }
 
-task stopProvider(type: KillProcessTask) {
-}
+task stopProvider(type: KillProcessTask) {}
 
 pact {
     serviceProviders {
