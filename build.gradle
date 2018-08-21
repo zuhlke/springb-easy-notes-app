@@ -95,7 +95,7 @@ pact {
             // Only load the pacts from the broker if the start tasks from the command line include pactVerify
             if ('pactVerify' in gradle.startParameter.taskNames) {
                 hasPactsFromPactBrokerWithTag('http://localhost:80', 'test')
-                stateChangeUrl = url('http://localhost:8989/setup')
+                stateChangeUrl = url('http://localhost:8989/setup?state=someState')
                 stateChangeUsesBody = false // defaults to true
             }
         }
