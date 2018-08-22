@@ -6,7 +6,7 @@ import java.util.*
 
 //@TypeAlias("notes") -- does not work!
 @Document(collection = "notes")
-data class Note(@Id val _id: String,
+data class Note (@Id val _id: String,
                 val title: String,
                 val content: String,
                 val createdAt: Date,

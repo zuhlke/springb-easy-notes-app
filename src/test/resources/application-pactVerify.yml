@@ -1,2 +1,4 @@
 server:
   port: 8989
+logging:
+  file: output.log
