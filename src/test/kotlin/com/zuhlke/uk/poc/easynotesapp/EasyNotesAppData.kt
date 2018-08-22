@@ -1,16 +1,10 @@
 package com.zuhlke.uk.poc.easynotesapp
 
-import com.fasterxml.jackson.databind.util.ISO8601DateFormat
 import com.github.fakemongo.junit.FongoRule
 import com.zuhlke.uk.poc.easynotesapp.model.Note
 import com.zuhlke.uk.poc.easynotesapp.repository.NoteRepository
 import org.junit.Rule
 import org.springframework.beans.factory.annotation.Autowired
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 abstract class EasyNotesAppData() {
 
