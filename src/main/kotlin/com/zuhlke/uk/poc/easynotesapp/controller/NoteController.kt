@@ -51,4 +51,10 @@ class NoteController {
             ResponseEntity(Response("Note not found with id $id"), HttpStatus.NOT_FOUND)
         }
     }
+
+    @DeleteMapping("/notes")
+    fun deleteAll(): ResponseEntity<Response> {
+        noteService.deleteAll()
+        return ResponseEntity.ok(Response("All notes deleted successfully."))
+    }
 }

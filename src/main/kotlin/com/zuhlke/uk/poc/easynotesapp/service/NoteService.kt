@@ -23,6 +23,8 @@ interface NoteService {
     fun save(note: Note): Note
 
     fun deleteById(id: String): Optional<Note>
+
+    fun deleteAll()
 }
 
 @Service("noteService")
@@ -50,6 +52,7 @@ class NoteServiceImpl : NoteService {
             Optional.empty()
         }
     }
+    override fun deleteAll() = noteRepository.deleteAll()
 
     companion object {
         val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
