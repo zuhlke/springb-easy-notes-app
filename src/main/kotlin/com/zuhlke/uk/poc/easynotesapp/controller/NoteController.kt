@@ -1,5 +1,6 @@
 package com.zuhlke.uk.poc.easynotesapp.controller
 
+import com.zuhlke.uk.poc.easynotesapp.model.DeleteByIdResponse
 import com.zuhlke.uk.poc.easynotesapp.model.Note
 import com.zuhlke.uk.poc.easynotesapp.model.Response
 import com.zuhlke.uk.poc.easynotesapp.service.NoteService
@@ -36,6 +37,16 @@ class NoteController {
         val optionalNote = noteService.findByIdAndUpdate(id, note)
         return if (optionalNote.isPresent) {
             ResponseEntity.ok(optionalNote.get())
+        } else {
+            ResponseEntity(Response("Note not found with id $id"), HttpStatus.NOT_FOUND)
+        }
+    }
+
+    @DeleteMapping("/notes/{id}")
+    fun deleteById(@PathVariable id: String): ResponseEntity<Any> {
+        val optionalNote = noteService.deleteById(id)
+        return if(optionalNote.isPresent) {
+            ResponseEntity.ok(DeleteByIdResponse("Note deleted successfully.", optionalNote.get()))
         } else {
             ResponseEntity(Response("Note not found with id $id"), HttpStatus.NOT_FOUND)
         }

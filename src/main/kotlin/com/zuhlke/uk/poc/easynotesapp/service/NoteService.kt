@@ -21,6 +21,8 @@ interface NoteService {
     fun findByIdAndUpdate(id: String, note: Note): Optional<Note>
 
     fun save(note: Note): Note
+
+    fun deleteById(id: String): Optional<Note>
 }
 
 @Service("noteService")
@@ -35,6 +37,15 @@ class NoteServiceImpl : NoteService {
         val existingNote = findById(id)
         return if(existingNote.isPresent) {
             Optional.of(save(Note(existingNote.get()._id, note.title, note.content, existingNote.get().createdAt, sdf.format(Date()), existingNote.get().__v)))
+        } else {
+            Optional.empty()
+        }
+    }
+    override fun deleteById(id: String): Optional<Note> {
+        val existingNote = findById(id)
+        return if(existingNote.isPresent) {
+            noteRepository.deleteById(id)
+            Optional.of(existingNote.get())
         } else {
             Optional.empty()
         }
