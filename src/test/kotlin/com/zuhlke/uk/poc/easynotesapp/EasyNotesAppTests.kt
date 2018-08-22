@@ -39,22 +39,22 @@ abstract class EasyNotesAppTests(val initializeTestData: Boolean = true) {
 				"1b71b7eeecbd28bac0b3f1ea",
 				"First Note",
 				"Doe, a deer, a female deer",
-				LocalDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
-				LocalDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
+				"2018-08-22T13:27:17.496Z",
+				"2018-08-22T13:27:17.496Z",
 				0)
 		val TEST_NOTE_2 = Note(
 				"28bac0b3f1ea1b71b7eeecdb",
 				"Second Note",
 				"Ray, a drop of golden sun",
-				LocalDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
-				LocalDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
+				"2018-08-22T13:27:17.496Z",
+				"2018-08-22T13:27:17.496Z",
 				0)
 		val TEST_NOTE_3 = Note(
 				"38bac0b3f1ea1b71b7eeecdc",
 				"Third Note",
 				"Me, a name I call myself",
-				LocalDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
-				LocalDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
+				"2018-08-22T13:27:17.496Z",
+				"2018-08-22T13:27:17.496Z",
 				0)
 	}
 }
