@@ -28,6 +28,9 @@ class NoteController {
 //        return noteService.findById(id).map { note -> ResponseEntity.ok(note) }.orElse(ResponseEntity.notFound().build())
     }
 
+    @PostMapping("/notes")
+    fun save(@RequestBody note: Note): ResponseEntity<Note> = ResponseEntity.ok(noteService.save(note))
+
     @PutMapping("/notes/{id}")
     fun findByIdAndUpdate(@PathVariable id: String, @RequestBody note: Note): ResponseEntity<Any> {
         val optionalNote = noteService.findByIdAndUpdate(id, note)
