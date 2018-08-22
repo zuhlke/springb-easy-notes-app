@@ -25,5 +25,7 @@ class NoteController {
         } else {
             ResponseEntity(Response("Note not found with id $id"), HttpStatus.NOT_FOUND)
         }
+
+//        return noteService.findById(id).map { note -> ResponseEntity.ok(note) }.orElse(ResponseEntity.notFound().build())
     }
 }

@@ -1,10 +1,15 @@
 package com.zuhlke.uk.poc.easynotesapp
 
+import com.fasterxml.jackson.databind.util.ISO8601DateFormat
 import com.github.fakemongo.junit.FongoRule
 import com.zuhlke.uk.poc.easynotesapp.model.Note
 import com.zuhlke.uk.poc.easynotesapp.repository.NoteRepository
 import org.junit.Rule
 import org.springframework.beans.factory.annotation.Autowired
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 abstract class EasyNotesAppData() {
@@ -40,15 +45,15 @@ abstract class EasyNotesAppData() {
 				"1b71b7eeecbd28bac0b3f1ea",
 				"First Note",
 				"Doe, a deer, a female deer",
-				Date(),
-				Date(),
+                "2018-08-22T13:27:17.496Z",
+                "2018-08-22T13:27:17.496Z",
 				0)
 		val TEST_NOTE_2 = Note(
 				"28bac0b3f1ea1b71b7eeecdb",
 				"Second Note",
 				"Ray, a drop of golden sun",
-				Date(),
-				Date(),
+                "2018-08-22T13:27:17.496Z",
+                "2018-08-22T13:27:17.496Z",
 				0)
 	}
 }

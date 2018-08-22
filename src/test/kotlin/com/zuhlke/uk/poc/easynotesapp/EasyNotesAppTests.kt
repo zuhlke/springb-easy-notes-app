@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @RunWith(SpringRunner::class)
@@ -37,22 +39,22 @@ abstract class EasyNotesAppTests(val initializeTestData: Boolean = true) {
 				"1b71b7eeecbd28bac0b3f1ea",
 				"First Note",
 				"Doe, a deer, a female deer",
-				Date(),
-				Date(),
+				LocalDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
+				LocalDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
 				0)
 		val TEST_NOTE_2 = Note(
 				"28bac0b3f1ea1b71b7eeecdb",
 				"Second Note",
 				"Ray, a drop of golden sun",
-				Date(),
-				Date(),
+				LocalDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
+				LocalDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
 				0)
 		val TEST_NOTE_3 = Note(
 				"38bac0b3f1ea1b71b7eeecdc",
 				"Third Note",
 				"Me, a name I call myself",
-				Date(),
-				Date(),
+				LocalDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
+				LocalDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
 				0)
 	}
 }

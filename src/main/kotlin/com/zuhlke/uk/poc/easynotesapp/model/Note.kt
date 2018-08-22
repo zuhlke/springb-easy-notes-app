@@ -2,6 +2,7 @@ package com.zuhlke.uk.poc.easynotesapp.model
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
+import java.time.LocalDateTime
 import java.util.*
 
 //@TypeAlias("notes") -- does not work!
@@ -9,7 +10,7 @@ import java.util.*
 data class Note (@Id val _id: String,
                 val title: String,
                 val content: String,
-                val createdAt: Date,
-                val updatedAt: Date,
+                val createdAt: String,
+                val updatedAt: String,
                 val __v: Int) {
 }
