@@ -34,11 +34,14 @@ class NoteServiceImpl : NoteService {
 
     override fun findAll(): List<Note> = noteRepository.findAll().toList()
     override fun findById(id: String): Optional<Note> = noteRepository.findById(id)
-    override fun save(note: Note): Note = noteRepository.save(note)
+    override fun save(note: Note): Note {
+        val currentTimestamp = sdf.format(Date())
+        return noteRepository.save(Note(note._id, note.title, note.content, currentTimestamp, currentTimestamp, 0))
+    }
     override fun findByIdAndUpdate(id: String, note: Note): Optional<Note> {
         val existingNote = findById(id)
         return if(existingNote.isPresent) {
-            Optional.of(save(Note(existingNote.get()._id, note.title, note.content, existingNote.get().createdAt, sdf.format(Date()), existingNote.get().__v)))
+            Optional.of(save(Note(existingNote.get()._id, note.title, note.content, existingNote.get().createdAt, sdf.format(Date()), existingNote.get().__v?.and(1))))
         } else {
             Optional.empty()
         }
