@@ -1,0 +1,7 @@
+server:
+  port: 8083
+spring:
+  data:
+    mongodb:
+      uri: "mongodb://mongo-0.mongo:27017,mongo-1.mongo:27017,mongo-2.mongo:27017/?replicaSet=rs0"
+      database: "easy-notes"
