@@ -5,6 +5,7 @@ import com.zuhlke.uk.poc.easynotesapp.model.Note
 import com.zuhlke.uk.poc.easynotesapp.repository.NoteRepository
 import org.junit.Rule
 import org.springframework.beans.factory.annotation.Autowired
+import java.util.*
 
 abstract class EasyNotesAppData() {
 
@@ -39,15 +40,15 @@ abstract class EasyNotesAppData() {
 				"1b71b7eeecbd28bac0b3f1ea",
 				"First Note",
 				"Doe, a deer, a female deer",
-                "2018-08-22T13:27:17.496Z",
-                "2018-08-22T13:27:17.496Z",
+                Date(),
+				Date(),
 				0)
 		val TEST_NOTE_2 = Note(
 				"28bac0b3f1ea1b71b7eeecdb",
 				"Second Note",
 				"Ray, a drop of golden sun",
-                "2018-08-22T13:27:17.496Z",
-                "2018-08-22T13:27:17.496Z",
+                Date(),
+                Date(),
 				0)
 	}
 }
