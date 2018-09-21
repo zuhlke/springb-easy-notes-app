@@ -99,7 +99,8 @@ pact {
             if ('pactVerify' in gradle.startParameter.taskNames) {
                 stateChangeUrl = url('http://localhost:8989/setup')
                 stateChangeUsesBody = false // defaults to true
-                hasPactsFromPactBrokerWithTag('http://35.242.180.87:80', 'test')
+                hasPactsFromPactBrokerWithTag('http://localhost:80', 'test')
+//                hasPactsFromPactBrokerWithTag('http://35.242.180.87:80', 'test')
             }
         }
     }
